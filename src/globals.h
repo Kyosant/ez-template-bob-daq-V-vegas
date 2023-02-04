@@ -13,6 +13,7 @@ extern pros::ADIDigitalOut Endgame;
 extern pros:: ADIDigitalIn limit;
 extern pros::ADIDigitalOut Bands;
 extern pros::ADIDigitalOut Pistake;
+extern pros::Controller con1;
 
 
 extern void cata_task_fn();
