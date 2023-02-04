@@ -1,69 +1,38 @@
 #include "main.h"
+#include "EZ-Template/util.hpp"
 #include "autons.hpp"
-
-#include "pros/adi.hpp"
-#include "pros/motors.h"
-
-
-/////
-// For instalattion, upgrading, documentations and tutorials, check out website!
-// https://ez-robotics.github.io/EZ-Template/
-/////
+#include "globals.h"
+#include "pros/rtos.hpp"
+#include "globals.cpp"
 
 
-// Chassis constructor
-Drive chassis (
-  // Left Chassis Ports (negative port will reverse it!)
-  //   the first port is the sensored port (when trackers are not used!)
-  {-1,-2,3}
-
-  // Right Chassis Ports (negative port will reverse it!)
-  //   the first port is the sensored port (when trackers are not used!)
-  ,{6, 7,-8}
-
-  // IMU Port
-  ,11
-
-  // Wheel Diameter (Remember, 4" wheels are actually 4.125!)
-  //    (or tracking wheel diameter)
-  ,3.25
-
-  // Cartridge RPM
-  //   (or tick per rotation if using tracking wheels)
-  ,600
-
-  // External Gear Ratio (MUST BE DECIMAL)
-  //    (or gear ratio of tracking wheel)
-  // eg. if your drive is 84:36 where the 36t is powered, your RATIO would be 2.333.
-  // eg. if your drive is 36:60 where the 60t is powered, your RATIO would be 0.6.
-  ,1.666
-
-  // Uncomment if using tracking wheels
-  /*
-  // Left Tracking Wheel Ports (negative port will reverse it!)
-  // ,{1, 2} // 3 wire encoder
-  // ,8 // Rotation sensor
-
-  // Right Tracking Wheel Ports (negative port will reverse it!)
-  // ,{-3, -4} // 3 wire encoder
-  // ,-9 // Rotation sensor
-  */
-
-  // Uncomment if tracking wheels are plugged into a 3 wire expander
-  // 3 Wire Port Expander Smart Port
-  // ,1
-);
-
-pros::Motor cata(9, pros::E_MOTOR_GEARSET_36, false);
-pros::Motor intake(4, pros::E_MOTOR_GEARSET_18, true);
-
-pros::ADIDigitalIn limit('A');
-pros::ADIDigitalOut Endgame('B');
 
 
-pros::Controller con1 (CONTROLLER_MASTER);
 
-void shoot(){
+/*void cata_task_fn() {
+
+  bool catastate=false;
+
+  while (true) {
+    if (cata_override){
+      catastate=false;
+      cata.move_velocity(100);
+      pros::delay(500);
+      cata_override=false;
+
+    }else if((limit.get_value() == false) && (catastate == false)) {
+      cata.move_velocity(100);
+
+    }else{
+      catastate=true;
+      cata.move_velocity(0);
+
+    }
+    pros::delay(10);
+  }
+}*/
+
+/*void shoot(){
   if (!limit.get_value()){
     cata.move_velocity(100);
 
@@ -82,7 +51,7 @@ void prime_cata (){
       
     }
     cata.move_velocity(0);
-}
+}*/
 
 
 
@@ -93,6 +62,8 @@ void prime_cata (){
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
+  
+  pros::Task cata_task(cata_task_fn);
   Endgame.set_value(false);
   cata.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   
@@ -126,6 +97,8 @@ void initialize() {
   // Initialize chassis and auton selector
   chassis.initialize();
   ez::as::initialize();
+
+  //pros::Task cata_task(cata_task_fn);
 }
 
 
@@ -175,7 +148,7 @@ void autonomous() {
   chassis.set_drive_brake(MOTOR_BRAKE_HOLD); // Set motors to hold.  This helps autonomous consistency.
 
   //ez::as::auton_selector.call_selected_auton(); // Calls selected auton from autonomous selector.
-  fivediskL();
+  //halfwpL();
 }
 
 
@@ -212,24 +185,34 @@ void opcontrol() {
     //inatke
      if (con1.get_digital(DIGITAL_L1)&&limit.get_value()){
         //intake
-        intake.move_velocity(200);
+        intake.move_voltage(12000);
 
       }else if (con1.get_digital(DIGITAL_L2)){
         //rollers
-        intake.move_velocity(-170);
+        intake.move_voltage(-12000);
 
       }else{
         intake.move_velocity(0);
       }
 
       //cata
-      shoot();
+     
 
       if (con1.get_digital(DIGITAL_A)&&con1.get_digital(DIGITAL_X)&&con1.get_digital(DIGITAL_B)&&con1.get_digital(DIGITAL_Y)) {
         Endgame.set_value(true);
       } else {
       }
 
+     if (con1.get_digital(DIGITAL_UP)) {
+        Pistake.set_value(true);
+     }else if (con1.get_digital(DIGITAL_DOWN)) {
+        Pistake.set_value(false);
+      
+     }
+
+     if (con1.get_digital(DIGITAL_R2)) {
+        fire();
+     }
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
 }

@@ -1,6 +1,9 @@
+#include "autons.hpp"
 #include "EZ-Template/util.hpp"
+#include "globals.h"
 #include "main.h"
-
+#include "pros/adi.h"
+#include "pros/rtos.hpp"
 
 
 /////
@@ -251,109 +254,200 @@ void interfered_example() {
 // . . .
 // Make your own autonomous functions here!
 // . . .
-void wpL() {
+/*void wpL() {
   prime_cata();
  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
  chassis.wait_drive();
- intake.move_relative(-100, -200);
+ intake.move_relative(300, -600);
  pros::delay(500);
- chassis.set_drive_pid(10, DRIVE_SPEED, true);
+ chassis.set_drive_pid(15, DRIVE_SPEED, true);
  chassis.wait_drive();
- chassis.set_swing_pid(ez::LEFT_SWING, 45, TURN_SPEED);
+ chassis.set_turn_pid(-13, TURN_SPEED);
   chassis.wait_drive();
-  chassis.set_drive_pid(60, DRIVE_SPEED, true);
- chassis.wait_drive();
- chassis.set_turn_pid(-49, TURN_SPEED);
- chassis.wait_drive();
- chassis.set_drive_pid(1  , DRIVE_SPEED, true);
- chassis.wait_drive();
+
   prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
   cata.move_velocity(0);
-  chassis.set_drive_pid(-1, DRIVE_SPEED, true);
+
+
+  intake.move_velocity(600);
+
+  chassis.set_drive_pid(-6, DRIVE_SPEED, true);
+ chassis.wait_drive();
+
+  chassis.set_turn_pid(-135, TURN_SPEED);
+  chassis.wait_drive();
+
+  Pistake.set_value(true);
+
+  chassis.set_drive_pid(-15  , 70, true);
+ 
+  chassis.wait_drive();
+
+  Pistake.set_value(false);
+
+  pros::delay(500);
+
+  chassis.set_drive_pid(-25  , 70, true);
+  
+  
+  
+ chassis.wait_drive();
+ chassis.set_turn_pid(-33, TURN_SPEED);
+ chassis.wait_drive();
+ chassis.set_drive_pid(11  , DRIVE_SPEED, true);
+ chassis.wait_drive();
+
+  prime_cata();
+  cata.move_velocity(100);
+  pros::delay(500);
+  prime_cata();
+
+
+
+  cata.move_velocity(0);
+  chassis.set_drive_pid(-7, DRIVE_SPEED, true);
  chassis.wait_drive();
   chassis.set_turn_pid(-135, TURN_SPEED);
  chassis.wait_drive();
- intake.move_velocity(200);
-  chassis.set_drive_pid(-69, DRIVE_SPEED, true);
+ intake.move_velocity(600);
+  chassis.set_drive_pid(-90, 80, true);
  chassis.wait_drive();
- intake.move_velocity(0);
- chassis.set_swing_pid(ez::RIGHT_SWING, -90, TURN_SPEED);
-  chassis.wait_drive();
   
- chassis.set_drive_pid(-4, DRIVE_SPEED, true);
+ intake.move_velocity(0);
+
+
+  
+ chassis.set_drive_pid(4, DRIVE_SPEED, true);
  chassis.wait_drive();
   
  
- intake.move_relative(-100, -200);
- pros::delay(500);
- chassis.set_drive_pid(4, DRIVE_SPEED, true);
- chassis.wait_drive();
+ 
 }
 
 void halfwpR() {
   prime_cata();
- chassis.set_drive_pid(23, DRIVE_SPEED, true);
+  
+  intake.move_velocity(600);
+ chassis.set_drive_pid(-30, 50, true);
  chassis.wait_drive();
- chassis.set_swing_pid(ez::RIGHT_SWING, 20, TURN_SPEED);
-  chassis.wait_drive();
+  
+  chassis.set_turn_pid(-156, TURN_SPEED);
+ chassis.wait_drive();
+  pros::delay(200);
+ chassis.set_drive_pid(5, DRIVE_SPEED, true);
+ 
  prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
   cata.move_velocity(0);
- intake.move_velocity(200);
- pros::delay(1000);
- intake.move_velocity(0);
+  
+ chassis.set_drive_pid(5, 70, true);
+ chassis.wait_drive();
+  chassis.set_turn_pid(-90, TURN_SPEED);
+ chassis.wait_drive();
+
+ chassis.set_drive_pid(-27, 70, true);
+ chassis.wait_drive();
+
+  chassis.set_drive_pid(2, 70, true);
+ chassis.wait_drive();
+
+ chassis.set_turn_pid(-0, 60);
+ chassis.wait_drive();
+
+ chassis.set_drive_pid(-20, 70, true);
+ chassis.wait_drive();
+
+ chassis.set_turn_pid(226, 60);
+ chassis.wait_drive();
+
+  chassis.set_drive_pid(5, 70, true);
+   chassis.wait_drive();
+
+ prime_cata();
+  cata.move_velocity(100);
+  pros::delay(500);
+  prime_cata();
+  cata.move_velocity(0);
+
+  chassis.set_drive_pid(-9, 70, true);
+ chassis.wait_drive();
+
+  chassis.set_turn_pid(135, 60);
+ chassis.wait_drive();
+
+ intake.move_velocity(00);
+
+ chassis.set_drive_pid(-70, 70, true);
+ chassis.wait_drive();
+  intake.move_relative(400, -600);
  pros::delay(500);
- prime_cata();
-  cata.move_velocity(100);
-  pros::delay(500);
-  prime_cata();
-  cata.move_velocity(0);
  chassis.set_drive_pid(10, DRIVE_SPEED, true);
  chassis.wait_drive();
- chassis.set_swing_pid(ez::LEFT_SWING,-45,TURN_SPEED);
- chassis.wait_drive();
- chassis.set_drive_pid(-24, DRIVE_SPEED, true);
- chassis.wait_drive();
- chassis.set_swing_pid(ez::RIGHT_SWING,0,TURN_SPEED);
- chassis.wait_drive();
- chassis.set_drive_pid(-4, DRIVE_SPEED, true);
- chassis.wait_drive();
- intake.move_relative(-100, -200);
- pros::delay(500);
- chassis.set_drive_pid(5, DRIVE_SPEED, true);
- chassis.wait_drive();
+
+
+
+
 }
 
 void halfwpL() {
   prime_cata();
  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
  chassis.wait_drive();
- intake.move_relative(-100, -200);
+ intake.move_relative(300, -600);
  pros::delay(500);
- chassis.set_drive_pid(10, DRIVE_SPEED, true);
+ chassis.set_drive_pid(15, DRIVE_SPEED, true);
  chassis.wait_drive();
- chassis.set_swing_pid(ez::LEFT_SWING, 45, TURN_SPEED);
+ chassis.set_turn_pid(-13, TURN_SPEED);
   chassis.wait_drive();
-  chassis.set_drive_pid(60, DRIVE_SPEED, true);
- chassis.wait_drive();
- chassis.set_turn_pid(-45, TURN_SPEED);
- chassis.wait_drive();
+
   prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
   cata.move_velocity(0);
 
-  chassis.set_swing_pid(ez::RIGHT_SWING, 45, TURN_SPEED);
+   chassis.set_drive_pid(-5, DRIVE_SPEED, true);
+ chassis.wait_drive();
+  
+  Pistake.set_value(true);
+
+   chassis.set_turn_pid(155, TURN_SPEED);
   chassis.wait_drive();
-  chassis.set_drive_pid(-50, DRIVE_SPEED, true);
+
+   chassis.set_drive_pid(-7, DRIVE_SPEED, true);
  chassis.wait_drive();
 
+ intake.move_velocity(600);
+
+ Pistake.set_value(false);
+
+ pros::delay(1500);
+
+ chassis.set_drive_pid(7, DRIVE_SPEED, true);
+ chassis.wait_drive();
+
+ chassis.set_turn_pid(-10, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(7, DRIVE_SPEED, true);
+  pros::delay(100);
+
+  prime_cata();
+  cata.move_velocity(100);
+  pros::delay(500);
+  prime_cata();
+  cata.move_velocity(0);
+
+
+
+
+
+ 
  
 
 
@@ -706,4 +800,4 @@ void skills() {
 
 void nothing(){
 
-}
+}*/

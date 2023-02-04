@@ -86,10 +86,3 @@ void opcontrol(void);
 #endif
 
 #endif  // _PROS_MAIN_H_
-
-extern pros::Motor cata;
-extern pros::Motor intake;
-void shoot();
-void prime_cata();
-extern pros::ADIDigitalOut Endgame;
-extern pros:: ADIDigitalIn limit;

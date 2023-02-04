@@ -1,5 +1,5 @@
 #pragma once
-
+#include "autons.hpp"
 #include "EZ-Template/drive/drive.hpp"
 
 extern Drive chassis;
