@@ -18,3 +18,4 @@ extern pros::Controller con1;
 
 extern void cata_task_fn();
 extern void fire();
+extern pros::Controller con1;
