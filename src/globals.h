@@ -17,3 +17,4 @@ extern pros::ADIDigitalOut Pistake;
 
 extern void cata_task_fn();
 extern void fire();
+extern pros::Controller con1;

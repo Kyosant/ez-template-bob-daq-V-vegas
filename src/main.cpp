@@ -3,7 +3,7 @@
 #include "autons.hpp"
 #include "globals.h"
 #include "pros/rtos.hpp"
-#include "globals.cpp"
+#include "globals.h"
 
 
 
