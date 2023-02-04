@@ -7,6 +7,7 @@
 
 extern pros::Motor cata;
 extern bool cata_override;
+extern bool state;
 extern pros::Motor intake;
 extern Drive chassis;
 extern pros::ADIDigitalOut Endgame;

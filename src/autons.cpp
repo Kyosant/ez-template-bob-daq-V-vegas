@@ -254,8 +254,8 @@ void interfered_example() {
 // . . .
 // Make your own autonomous functions here!
 // . . .
-/*void wpL() {
-  prime_cata();
+void wpL() {
+  //prime_cata();
  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
  chassis.wait_drive();
  intake.move_relative(300, -600);
@@ -265,11 +265,11 @@ void interfered_example() {
  chassis.set_turn_pid(-13, TURN_SPEED);
   chassis.wait_drive();
 
-  prime_cata();
-  cata.move_velocity(100);
-  pros::delay(500);
-  prime_cata();
-  cata.move_velocity(0);
+ // prime_cata();
+ // cata.move_velocity(100);
+ // pros::delay(500);
+ // prime_cata();
+  //cata.move_velocity(0);
 
 
   intake.move_velocity(600);
@@ -300,10 +300,10 @@ void interfered_example() {
  chassis.set_drive_pid(11  , DRIVE_SPEED, true);
  chassis.wait_drive();
 
-  prime_cata();
-  cata.move_velocity(100);
-  pros::delay(500);
-  prime_cata();
+ // prime_cata();
+  //cata.move_velocity(100);
+  //pros::delay(500);
+ // prime_cata();
 
 
 
@@ -328,7 +328,7 @@ void interfered_example() {
 }
 
 void halfwpR() {
-  prime_cata();
+ // prime_cata();
   
   intake.move_velocity(600);
  chassis.set_drive_pid(-30, 50, true);
@@ -339,11 +339,11 @@ void halfwpR() {
   pros::delay(200);
  chassis.set_drive_pid(5, DRIVE_SPEED, true);
  
- prime_cata();
+ /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
   
  chassis.set_drive_pid(5, 70, true);
  chassis.wait_drive();
@@ -368,11 +368,11 @@ void halfwpR() {
   chassis.set_drive_pid(5, 70, true);
    chassis.wait_drive();
 
- prime_cata();
+ /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
   chassis.set_drive_pid(-9, 70, true);
  chassis.wait_drive();
@@ -395,7 +395,7 @@ void halfwpR() {
 }
 
 void halfwpL() {
-  prime_cata();
+  //prime_cata();
  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
  chassis.wait_drive();
  intake.move_relative(300, -600);
@@ -405,11 +405,13 @@ void halfwpL() {
  chassis.set_turn_pid(-13, TURN_SPEED);
   chassis.wait_drive();
 
-  prime_cata();
-  cata.move_velocity(100);
-  pros::delay(500);
-  prime_cata();
-  cata.move_velocity(0);
+ // prime_cata();
+ // cata.move_velocity(100);
+ // pros::delay(500);
+ // prime_cata();
+ // cata.move_velocity(0);
+
+ fire();
 
    chassis.set_drive_pid(-5, DRIVE_SPEED, true);
  chassis.wait_drive();
@@ -437,11 +439,11 @@ void halfwpL() {
   chassis.set_drive_pid(7, DRIVE_SPEED, true);
   pros::delay(100);
 
-  prime_cata();
+  /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
 
 
@@ -455,7 +457,7 @@ void halfwpL() {
 }
 
 void fivediskL(){
-  prime_cata();
+ // prime_cata();
  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
  chassis.wait_drive();
  intake.move_relative(-100, -200);
@@ -470,13 +472,13 @@ void fivediskL(){
  chassis.wait_drive();
  
  
-  prime_cata();
+  /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
   cata.move_velocity(0);
   chassis.set_drive_pid(-1, DRIVE_SPEED, true);
- chassis.wait_drive();
+ chassis.wait_drive();*/
  
 
   chassis.set_swing_pid(ez::LEFT_SWING, -135, TURN_SPEED);
@@ -499,11 +501,11 @@ void fivediskL(){
   
   
  
-  prime_cata();
+  /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
    chassis.set_drive_pid(-6, DRIVE_SPEED, true);
     chassis.wait_drive();
   intake.move_velocity(200);
@@ -525,18 +527,18 @@ void fivediskL(){
  chassis.set_drive_pid(3, DRIVE_SPEED, true);
 
  
-  prime_cata();
+  /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
   
 
 }
 
 void skills() {
   //go back and get roller
-  prime_cata();
+  //prime_cata();
 
  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
  chassis.wait_drive();
@@ -577,11 +579,11 @@ void skills() {
  chassis.set_drive_pid(30, DRIVE_SPEED, true);
  chassis.wait_drive();
 
-  prime_cata();
+  /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
   // get line of 3 (not on barrier)
   chassis.set_drive_pid(-1, DRIVE_SPEED, true);
@@ -606,11 +608,11 @@ void skills() {
 
   intake.move_velocity(0);
 
-  prime_cata();
+ /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
   //get line of 3 on barrier
   chassis.set_turn_pid(180, TURN_SPEED);
@@ -624,11 +626,11 @@ void skills() {
  chassis.set_turn_pid(-90, TURN_SPEED);
  chassis.wait_drive();
 
-  prime_cata();
+  /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
   //get 3 stack
   chassis.set_turn_pid(-45, TURN_SPEED);
@@ -642,11 +644,11 @@ void skills() {
  chassis.set_turn_pid(-90, TURN_SPEED);
  chassis.wait_drive();
 
-  prime_cata();
+  /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
   //rollers
 
@@ -705,11 +707,11 @@ void skills() {
  chassis.set_drive_pid(135, DRIVE_SPEED, true);
  chassis.wait_drive();
 
- prime_cata();
+ /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
   //get 3 stack 
 
@@ -727,11 +729,11 @@ void skills() {
  chassis.set_drive_pid(48, DRIVE_SPEED, true);
  chassis.wait_drive();
 
-  prime_cata();
+ /* prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
   //get line on low goal 1
 
@@ -748,11 +750,11 @@ void skills() {
 
  intake.move_velocity(0);
 
- prime_cata();
+ /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
   //get line on low goal 2
 
@@ -769,11 +771,11 @@ void skills() {
 
  intake.move_velocity(0);
 
- prime_cata();
+ /*prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);
+  cata.move_velocity(0);*/
 
 
   // dash to expand
@@ -800,4 +802,4 @@ void skills() {
 
 void nothing(){
 
-}*/
+}

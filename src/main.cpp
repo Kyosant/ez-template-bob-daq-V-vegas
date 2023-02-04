@@ -64,6 +64,8 @@ void prime_cata (){
 void initialize() {
   
   pros::Task cata_task(cata_task_fn);
+  fire();
+  state = true;
   Endgame.set_value(false);
   cata.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   
@@ -148,7 +150,7 @@ void autonomous() {
   chassis.set_drive_brake(MOTOR_BRAKE_HOLD); // Set motors to hold.  This helps autonomous consistency.
 
   //ez::as::auton_selector.call_selected_auton(); // Calls selected auton from autonomous selector.
-  //halfwpL();
+  halfwpL();
 }
 
 
