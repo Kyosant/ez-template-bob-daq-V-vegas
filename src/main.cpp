@@ -151,12 +151,12 @@ void opcontrol() {
       intake.move_velocity(0);
     }
 
-    //band release
+    // band release
     if (con1.get_digital(DIGITAL_LEFT)) {
       Bands.set_value(true);
     }
 
-    //cata
+    // cata
     if (con1.get_digital(DIGITAL_R1)) {
       fire();
     }

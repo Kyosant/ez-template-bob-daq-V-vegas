@@ -366,66 +366,104 @@ void wpL() {
 }
 
 void halfwpR() {
- // prime_cata();
-  
+
+  // lower cata
+  fire();
+
+  // turn on intake
   intake.move_velocity(600);
- chassis.set_drive_pid(-30, 50, true);
- chassis.wait_drive();
-  
+
+  // drive and pick up disk
+  chassis.set_drive_pid(-30, 50, true);
+  chassis.wait_drive();
+
+  // turn towards goal
   chassis.set_turn_pid(-156, TURN_SPEED);
- chassis.wait_drive();
+  chassis.wait_drive();
+
+  // wait for disk to settle
   pros::delay(200);
- chassis.set_drive_pid(5, DRIVE_SPEED, true);
+
+  // drive to the line
+  chassis.set_drive_pid(5, DRIVE_SPEED, true);
  
- /*prime_cata();
-  cata.move_velocity(100);
-  pros::delay(500);
-  prime_cata();
-  cata.move_velocity(0);*/
-  
- chassis.set_drive_pid(5, 70, true);
- chassis.wait_drive();
-  chassis.set_turn_pid(-90, TURN_SPEED);
- chassis.wait_drive();
+  // shoot
+  fire();
 
- chassis.set_drive_pid(-27, 70, true);
- chassis.wait_drive();
-
-  chassis.set_drive_pid(2, 70, true);
- chassis.wait_drive();
-
- chassis.set_turn_pid(-0, 60);
- chassis.wait_drive();
-
- chassis.set_drive_pid(-20, 70, true);
- chassis.wait_drive();
-
- chassis.set_turn_pid(226, 60);
- chassis.wait_drive();
-
+  // move forwards a bit
   chassis.set_drive_pid(5, 70, true);
-   chassis.wait_drive();
+  chassis.wait_drive();
 
- /*prime_cata();
-  cata.move_velocity(100);
-  pros::delay(500);
-  prime_cata();
-  cata.move_velocity(0);*/
+  // turn to lowgoal
+  chassis.set_turn_pid(-90, TURN_SPEED);
+  chassis.wait_drive();
 
+  // pick up lone disk and far right lowgoal disk
+  chassis.set_drive_pid(-27, 70, true);
+  chassis.wait_drive();
+
+  // drive forwards a bit to clear the turn
+  chassis.set_drive_pid(2, 70, true);
+  chassis.wait_drive();
+
+  // turn to 3rd disk
+  chassis.set_turn_pid(-0, 60);
+  chassis.wait_drive();
+
+  // go to 3rd disk
+  chassis.set_drive_pid(-20, 70, true);
+  chassis.wait_drive();
+
+  // turn to goal
+  chassis.set_turn_pid(226, 60);
+  chassis.wait_drive();
+
+  // drive to line
+  chassis.set_drive_pid(5, 70, true);
+  chassis.wait_drive();
+
+  // shoot
+  fire();
+  
+  // back up a lil bit
   chassis.set_drive_pid(-9, 70, true);
- chassis.wait_drive();
+  chassis.wait_drive();
 
+  // turn to rollers
   chassis.set_turn_pid(135, 60);
- chassis.wait_drive();
+  chassis.wait_drive();
 
- intake.move_velocity(00);
+  // turn off intake
+  intake.move_velocity(0);
 
- chassis.set_drive_pid(-70, 70, true);
- chassis.wait_drive();
+  // move back to rollers
+  chassis.set_drive_pid(-70, 70, true);
+  chassis.wait_drive();
+
+  // spin rollers
   intake.move_relative(400, -600);
- pros::delay(500);
- chassis.set_drive_pid(10, DRIVE_SPEED, true);
- chassis.wait_drive();
+  pros::delay(500);
+
+  // drive away from rollers
+  chassis.set_drive_pid(10, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  /* 
+  // experimental
+
+  // drive farther
+  chassis.set_drive_pid(10, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // open piston intake
+  Pistake.set_value(true);
+
+  // turn towards 3 stack
+
+
+  
+  
+  */
 
 
 
