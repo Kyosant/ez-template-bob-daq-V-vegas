@@ -184,37 +184,48 @@ void opcontrol() {
     // Put more user control code here!
     // . . .
 
-    //inatke
-     if (con1.get_digital(DIGITAL_L1)&&limit.get_value()){
-        //intake
-        intake.move_voltage(12000);
+    //intake
+    if (con1.get_digital(DIGITAL_L1)&&limit.get_value()){
+      //intake
+      intake.move_voltage(12000);
 
-      }else if (con1.get_digital(DIGITAL_L2)){
-        //rollers
-        intake.move_voltage(-12000);
+    }else if (con1.get_digital(DIGITAL_L2)){
+      //rollers
+      intake.move_voltage(-12000);
 
-      }else{
-        intake.move_velocity(0);
-      }
+    }else if (con1.get_digital(DIGITAL_R2)){
+      //intake override
+      intake.move_voltage(12000);
 
-      //cata
-     
+    }else {
+      intake.move_velocity(0);
+    }
 
-      if (con1.get_digital(DIGITAL_A)&&con1.get_digital(DIGITAL_X)&&con1.get_digital(DIGITAL_B)&&con1.get_digital(DIGITAL_Y)) {
-        Endgame.set_value(true);
-      } else {
-      }
+    //band release
+    if (con1.get_digital(DIGITAL_LEFT)) {
+      Bands.set_value(true);
+    }
 
-     if (con1.get_digital(DIGITAL_UP)) {
-        Pistake.set_value(true);
-     }else if (con1.get_digital(DIGITAL_DOWN)) {
-        Pistake.set_value(false);
+    //cata
+    if (con1.get_digital(DIGITAL_R1)) {
+      fire();
+    }
+
+    // endgame
+    if (con1.get_digital(DIGITAL_A)&&con1.get_digital(DIGITAL_X)&&con1.get_digital(DIGITAL_B)&&con1.get_digital(DIGITAL_Y)) {
+      Endgame.set_value(true);
+    } else {
+    }
+
+    // piston intake
+    if (con1.get_digital(DIGITAL_UP)) {
+      Pistake.set_value(true);
+
+    }else if (con1.get_digital(DIGITAL_DOWN)) {
+      Pistake.set_value(false);
       
-     }
+    }
 
-     if (con1.get_digital(DIGITAL_R2)) {
-        fire();
-     }
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
 }
