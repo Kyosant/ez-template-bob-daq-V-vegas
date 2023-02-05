@@ -5,56 +5,6 @@
 #include "pros/rtos.hpp"
 
 
-
-
-
-
-/*void cata_task {
-
-  bool catastate=false;
-
-  while (true) {
-    if (cata_override){
-      catastate=false;
-      cata.move_velocity(100);
-      pros::delay(500);
-      cata_override=false;
-
-    }else if((limit.get_value() == false) && (catastate == false)) {
-      cata.move_velocity(100);
-
-    }else{
-      catastate=true;
-      cata.move_velocity(0);
-
-    }
-    pros::delay(10);
-  }
-}*/
-
-/*void shoot(){
-  if (!limit.get_value()){
-    cata.move_velocity(100);
-
-  }else if(limit.get_value()&&(con1.get_digital(DIGITAL_R1))) {
-    cata.move_velocity(100);
-  }else if(limit.get_value() && (!con1.get_digital(DIGITAL_R1))){
-    cata.move_velocity(0);
-    cata.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    cata.move_velocity(0);
-  }
-}
-
-void prime_cata (){
-     while(!limit.get_value()) {
-      cata.move_velocity(100);
-      
-    }
-    cata.move_velocity(0);
-}*/
-
-
-
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
