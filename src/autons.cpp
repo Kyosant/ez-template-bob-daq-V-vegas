@@ -254,74 +254,112 @@ void interfered_example() {
 // . . .
 // Make your own autonomous functions here!
 // . . .
+
 void wpL() {
-  //prime_cata();
- chassis.set_drive_pid(-2, DRIVE_SPEED, true);
- chassis.wait_drive();
- intake.move_relative(300, -600);
- pros::delay(500);
- chassis.set_drive_pid(15, DRIVE_SPEED, true);
- chassis.wait_drive();
- chassis.set_turn_pid(-13, TURN_SPEED);
+
+  // lower catapult at the start of auton
+  fire();
+  
+  // move back to roller
+  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
   chassis.wait_drive();
 
- // prime_cata();
- // cata.move_velocity(100);
- // pros::delay(500);
- // prime_cata();
-  //cata.move_velocity(0);
-
-
-  intake.move_velocity(600);
-
-  chassis.set_drive_pid(-6, DRIVE_SPEED, true);
- chassis.wait_drive();
-
-  chassis.set_turn_pid(-135, TURN_SPEED);
-  chassis.wait_drive();
-
-  Pistake.set_value(true);
-
-  chassis.set_drive_pid(-15  , 70, true);
- 
-  chassis.wait_drive();
-
-  Pistake.set_value(false);
-
+  // spin roller
+  intake.move_relative(400, -600);
   pros::delay(500);
 
-  chassis.set_drive_pid(-25  , 70, true);
-  
-  
-  
- chassis.wait_drive();
- chassis.set_turn_pid(-33, TURN_SPEED);
- chassis.wait_drive();
- chassis.set_drive_pid(11  , DRIVE_SPEED, true);
- chassis.wait_drive();
+  // drive up to line to shoot
+  chassis.set_drive_pid(15, DRIVE_SPEED, true);
+  chassis.wait_drive();
 
- // prime_cata();
-  //cata.move_velocity(100);
-  //pros::delay(500);
- // prime_cata();
+  // turn to goal
+  chassis.set_turn_pid(-13, TURN_SPEED);
+  chassis.wait_drive();
 
+  // shoot 
+  fire();
 
+  // start intake
+  intake.move_velocity(600);
 
-  cata.move_velocity(0);
-  chassis.set_drive_pid(-7, DRIVE_SPEED, true);
- chassis.wait_drive();
+  // back away from line
+  chassis.set_drive_pid(-6, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // turn to 3 stack
   chassis.set_turn_pid(-135, TURN_SPEED);
- chassis.wait_drive();
- intake.move_velocity(600);
+  chassis.wait_drive();
+
+  // raise intake
+  Pistake.set_value(true);
+
+  // drive over 3 stack
+  chassis.set_drive_pid(-15  , 70, true);
+  chassis.wait_drive();
+
+  // lower intake
+  Pistake.set_value(false);
+
+  // wait a bit
+  pros::delay(500);
+
+  // keep going to the middle
+  chassis.set_drive_pid(-25  , 70, true);
+  chassis.wait_drive();
+
+  // turn to goal
+  chassis.set_turn_pid(-33, TURN_SPEED);
+  chassis.wait_drive();
+
+  // drive up to the line
+  chassis.set_drive_pid(11  , DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // shoot
+  fire();
+
+  // back up
+  chassis.set_drive_pid(-7, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // turn to get line of 3
+  chassis.set_turn_pid(-135, TURN_SPEED);
+  chassis.wait_drive();
+
+  // start intake
+  intake.move_velocity(600);
+
+  // go back to roller
   chassis.set_drive_pid(-90, 80, true);
- chassis.wait_drive();
+  chassis.wait_drive();
   
- intake.move_velocity(0);
+  // stop intake
+  intake.move_velocity(0);
+
+  // drive off of roller
+  chassis.set_drive_pid(4, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  /*
+  // experimental
+
+  // drive farther
+  chassis.set_drive_pid(8, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // swing to aim at goal
+  chassis.set_swing_pid(ez::RIGHT_SWING, -30, TURN_SPEED);
+  chassis.wait_drive();
+
+  // boost 
+  chassis.set_drive_pid(4, DRIVE_SPEED, true);
+
+  // shoot
+  fire();
 
 
-  
- chassis.set_drive_pid(4, DRIVE_SPEED, true);
- chassis.wait_drive();
+
+  */
   
  
  
@@ -395,8 +433,8 @@ void halfwpR() {
 }
 
 void halfwpL() {
-  //prime_cata();
- chassis.set_drive_pid(-2, DRIVE_SPEED, true);
+  fire();
+  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
  chassis.wait_drive();
  intake.move_relative(300, -600);
  pros::delay(500);

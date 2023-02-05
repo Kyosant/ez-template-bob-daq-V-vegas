@@ -80,7 +80,7 @@ void cata_task_fn() {
 
 void fire() {
   cata_override = true;
-  cata= 127;
+  cata = 127;
   pros::delay(200);
   cata_override = false;
   state = true;
