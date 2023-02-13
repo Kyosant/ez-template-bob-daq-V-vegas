@@ -10,7 +10,7 @@ Drive chassis (
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{6, 7,-8}
+  ,{6, 7,-12}
 
   // IMU Port
   ,11
@@ -59,7 +59,7 @@ pros::Controller con1 (pros::E_CONTROLLER_MASTER);
 
 void cataTask();
 bool cata_override = false;
-bool state = false;
+bool state = true;
 
 void cata_task_fn() {
   
@@ -83,5 +83,15 @@ void fire() {
   cata = 127;
   pros::delay(200);
   cata_override = false;
-  state = true;
+  state = false;
+}
+
+void lower() {
+    
+    if (!limit.get_value()) {
+        cata = 127;
+    } else {
+        
+    }
+
 }

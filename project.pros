@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "half wp L",
+    "project_name": "half wp r",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -188,7 +188,7 @@
       }
     },
     "upload_options": {
-      "slot": 3
+      "slot": 2
     }
   }
 }

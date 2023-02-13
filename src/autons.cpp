@@ -258,7 +258,7 @@ void interfered_example() {
 void wpL() {
 
   // lower catapult at the start of auton
-  fire();
+  lower();
   
   // move back to roller
   chassis.set_drive_pid(-2, DRIVE_SPEED, true);
@@ -269,7 +269,7 @@ void wpL() {
   pros::delay(500);
 
   // drive up to line to shoot
-  chassis.set_drive_pid(15, DRIVE_SPEED, true);
+  chassis.set_drive_pid(12, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   // turn to goal
@@ -301,10 +301,10 @@ void wpL() {
   Pistake.set_value(false);
 
   // wait a bit
-  pros::delay(500);
+  pros::delay(1000);
 
   // keep going to the middle
-  chassis.set_drive_pid(-25  , 70, true);
+  chassis.set_drive_pid(-25  , 50, true);
   chassis.wait_drive();
 
   // turn to goal
@@ -319,7 +319,7 @@ void wpL() {
   fire();
 
   // back up
-  chassis.set_drive_pid(-7, DRIVE_SPEED, true);
+  chassis.set_drive_pid(-5, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   // turn to get line of 3
@@ -330,36 +330,36 @@ void wpL() {
   intake.move_velocity(600);
 
   // go back to roller
-  chassis.set_drive_pid(-90, 80, true);
+  chassis.set_drive_pid(-88, 80, true);
   chassis.wait_drive();
   
   // stop intake
   intake.move_velocity(0);
 
   // drive off of roller
-  chassis.set_drive_pid(4, DRIVE_SPEED, true);
+  chassis.set_drive_pid(65, DRIVE_SPEED, true);
   chassis.wait_drive();
 
-  /*
+  ///*
   // experimental
 
   // drive farther
-  chassis.set_drive_pid(8, DRIVE_SPEED, true);
-  chassis.wait_drive();
+  //chassis.set_drive_pid(8, DRIVE_SPEED, true);
+  //chassis.wait_drive();
 
   // swing to aim at goal
-  chassis.set_swing_pid(ez::RIGHT_SWING, -30, TURN_SPEED);
+  chassis.set_swing_pid(ez::LEFT_SWING, -40, TURN_SPEED);
   chassis.wait_drive();
 
   // boost 
-  chassis.set_drive_pid(4, DRIVE_SPEED, true);
+ // chassis.set_drive_pid(4, DRIVE_SPEED, true);
 
   // shoot
   fire();
 
 
 
-  */
+  //*/
   
  
  
@@ -368,7 +368,7 @@ void wpL() {
 void halfwpR() {
 
   // lower cata
-  fire();
+  lower();
 
   // turn on intake
   intake.move_velocity(600);
@@ -382,13 +382,15 @@ void halfwpR() {
   chassis.wait_drive();
 
   // wait for disk to settle
-  pros::delay(200);
+  pros::delay(500);
 
   // drive to the line
-  chassis.set_drive_pid(5, DRIVE_SPEED, true);
+  chassis.set_drive_pid(5, 60, true);
+ 
  
   // shoot
   fire();
+  pros::delay(500);
 
   // move forwards a bit
   chassis.set_drive_pid(5, 70, true);
@@ -399,15 +401,15 @@ void halfwpR() {
   chassis.wait_drive();
 
   // pick up lone disk and far right lowgoal disk
-  chassis.set_drive_pid(-27, 70, true);
+  chassis.set_drive_pid(-27, 80, true);
   chassis.wait_drive();
 
   // drive forwards a bit to clear the turn
-  chassis.set_drive_pid(2, 70, true);
+  chassis.set_drive_pid(2, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   // turn to 3rd disk
-  chassis.set_turn_pid(-0, 60);
+  chassis.set_turn_pid(-0, 70);
   chassis.wait_drive();
 
   // go to 3rd disk
@@ -415,7 +417,7 @@ void halfwpR() {
   chassis.wait_drive();
 
   // turn to goal
-  chassis.set_turn_pid(226, 60);
+  chassis.set_turn_pid(228, 60);
   chassis.wait_drive();
 
   // drive to line
@@ -426,7 +428,7 @@ void halfwpR() {
   fire();
   
   // back up a lil bit
-  chassis.set_drive_pid(-9, 70, true);
+  chassis.set_drive_pid(-7, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   // turn to rollers
@@ -437,7 +439,7 @@ void halfwpR() {
   intake.move_velocity(0);
 
   // move back to rollers
-  chassis.set_drive_pid(-70, 70, true);
+  chassis.set_drive_pid(-72, 70, true);
   chassis.wait_drive();
 
   // spin rollers
@@ -483,7 +485,7 @@ void halfwpR() {
 void halfwpL() {
 
   // lower cata
-  fire();
+  lower();
 
   // move back to rollers
   chassis.set_drive_pid(-2, DRIVE_SPEED, true);
@@ -494,7 +496,7 @@ void halfwpL() {
   pros::delay(500);
 
   // move off rollers
-  chassis.set_drive_pid(15, DRIVE_SPEED, true);
+  chassis.set_drive_pid(10, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   // turn to goal
@@ -505,18 +507,18 @@ void halfwpL() {
   fire();
 
   // back away from line
-  chassis.set_drive_pid(-5, DRIVE_SPEED, true);
+  chassis.set_drive_pid(-0, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   //raise intake
   Pistake.set_value(true);
 
   //turn towards stack
-  chassis.set_turn_pid(155, TURN_SPEED);
+  chassis.set_turn_pid(160, TURN_SPEED);
   chassis.wait_drive();
 
   // move over stack
-  chassis.set_drive_pid(-7, DRIVE_SPEED, true);
+  chassis.set_drive_pid(-8, 70, true);
   chassis.wait_drive();
 
   // intake on
@@ -524,31 +526,55 @@ void halfwpL() {
 
   // decimate stack
   Pistake.set_value(false);
-  pros::delay(1500);
+  pros::delay(1800);
 
   // move away from line
-  chassis.set_drive_pid(7, DRIVE_SPEED, true);
+  chassis.set_drive_pid(12, 50, true);
   chassis.wait_drive();
 
   // turn to goal
-  chassis.set_turn_pid(-10, TURN_SPEED);
+  chassis.set_turn_pid(-12, TURN_SPEED);
   chassis.wait_drive();
 
   // drive forwards and boost
-  chassis.set_drive_pid(7, DRIVE_SPEED, true);
-  pros::delay(100);
+  chassis.set_drive_pid(14, DRIVE_SPEED, true);
+  pros::delay(300);
   
   // shoot
   fire();
+  pros::delay(100);
 
   // raise intake
   Pistake.set_value(true);
 
   // swing to 3 stack
-  chassis.set_swing_pid(ez::RIGHT_SWING, -135, TURN_SPEED);
+  chassis.set_swing_pid(ez::LEFT_SWING, -140, TURN_SPEED);
   chassis.wait_drive();
 
-  
+  // go over stack
+  chassis.set_drive_pid(-8, 80);
+  chassis.wait_drive();
+
+  Pistake.set_value(false);
+  pros::delay(1500);
+
+  chassis.set_drive_pid(-20, 80);
+  chassis.wait_drive();
+
+
+  // turn to goal
+  chassis.set_turn_pid(-31, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(10, 60);
+  chassis.wait_drive();
+
+  fire();
+  pros::delay(100);
+
+  chassis.set_drive_pid(-8, 80);
+  chassis.wait_drive();
+
   
 
 
@@ -643,13 +669,15 @@ void fivediskL(){
 }
 
 void skills() {
-  //go back and get roller
-  //prime_cata();
+  // lower cata
+  fire();
+
+  // back up into roller
 
  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
  chassis.wait_drive();
 
- intake.move_relative(-200, -200);
+ intake.move_relative(400, -600);
  pros::delay(500);
 
  //get disk on line and other roller

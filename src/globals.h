@@ -19,4 +19,5 @@ extern pros::Controller con1;
 
 extern void cata_task_fn();
 extern void fire();
+extern void lower();
 extern pros::Controller con1;
