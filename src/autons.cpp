@@ -669,7 +669,164 @@ void fivediskL(){
 }
 
 void skills() {
+
   // lower cata
+  lower();
+
+  // move back to rollers
+  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // spin rollers
+  intake.move_relative(400, -600);
+  pros::delay(500);
+
+  // move off rollers
+  chassis.set_drive_pid(10, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // turn to lone disk
+  chassis.set_turn_pid(135, TURN_SPEED);
+  chassis.wait_drive();
+
+  // Intake disc + get roller
+  chassis.set_drive_pid(-24, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // Swing to goal
+  chassis.set_swing_pid(ez::RIGHT_SWING, -24, SWING_SPEED);
+  chassis.wait_drive();
+
+  // Drive to goal
+  chassis.set_drive_pid(48, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // Shoot
+  fire();
+
+  // Get 3 on Barrier
+  chassis.set_swing_pid(ez::RIGHT_SWING, -90, SWING_SPEED);
+  chassis.wait_drive();
+
+  // Intake 3 on barrier
+  chassis.set_drive_pid(-28, 70, true);
+  chassis.wait_drive();
+
+  // Go to shoot
+  chassis.set_drive_pid(-28, 70, true);
+  chassis.wait_drive();
+
+  // Turn to goal
+  chassis.set_turn_pid(0, TURN_SPEED);
+  chassis.wait_drive();
+
+  // Shoot
+  fire();
+
+  // Turn to first disk in line of 3
+  chassis.set_turn_pid(-45, TURN_SPEED);
+  chassis.wait_drive();
+
+  // Move back to intake that disk
+  chassis.set_drive_pid(-28, 70, true);
+  chassis.wait_drive();
+
+  // Turn to the rest
+  chassis.set_turn_pid(-45, TURN_SPEED);
+  chassis.wait_drive();
+
+  // Intake the rest
+  chassis.set_drive_pid(-30, 70, true);
+  chassis.wait_drive();
+
+  // Turn to goal
+  chassis.set_turn_pid(-45, TURN_SPEED);
+  chassis.wait_drive();
+
+  // Shoot
+  fire();
+
+  // Turn to last 3 on barrier
+  chassis.set_turn_pid(-180, TURN_SPEED);
+  chassis.wait_drive();
+
+  // Intake line of 3 on barrier
+  chassis.set_drive_pid(-30, 70, true);
+  chassis.wait_drive();
+
+  // Turn to goal 
+  chassis.set_turn_pid(-90, TURN_SPEED);
+  chassis.wait_drive();
+
+  // Shoot
+  fire();
+
+  // Turn to 3 stack
+  chassis.set_turn_pid(-35, TURN_SPEED);
+  chassis.wait_drive();
+
+  // Pistake Up
+  Pistake.set_value(true);
+
+  // Drive over stack
+  chassis.set_drive_pid(-24, 70, true);
+  chassis.wait_drive();
+
+  // Eat stack
+  Pistake.set_value(false);
+
+  // Wait before swimming
+  pros::delay(1000);
+
+  // Drive to goal
+  chassis.set_drive_pid(-24, 70, true);
+  chassis.wait_drive();
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*// lower cata
   fire();
 
   // back up into roller
@@ -713,11 +870,7 @@ void skills() {
  chassis.set_drive_pid(30, DRIVE_SPEED, true);
  chassis.wait_drive();
 
-  /*prime_cata();
-  cata.move_velocity(100);
-  pros::delay(500);
-  prime_cata();
-  cata.move_velocity(0);*/
+  fire();
 
   // get line of 3 (not on barrier)
   chassis.set_drive_pid(-1, DRIVE_SPEED, true);
@@ -742,11 +895,11 @@ void skills() {
 
   intake.move_velocity(0);
 
- /*prime_cata();
+ prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);*/
+  cata.move_velocity(0);
 
   //get line of 3 on barrier
   chassis.set_turn_pid(180, TURN_SPEED);
@@ -760,11 +913,11 @@ void skills() {
  chassis.set_turn_pid(-90, TURN_SPEED);
  chassis.wait_drive();
 
-  /*prime_cata();
+  prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);*/
+  cata.move_velocity(0);
 
   //get 3 stack
   chassis.set_turn_pid(-45, TURN_SPEED);
@@ -778,11 +931,11 @@ void skills() {
  chassis.set_turn_pid(-90, TURN_SPEED);
  chassis.wait_drive();
 
-  /*prime_cata();
+  prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);*/
+  cata.move_velocity(0);
 
   //rollers
 
@@ -841,11 +994,11 @@ void skills() {
  chassis.set_drive_pid(135, DRIVE_SPEED, true);
  chassis.wait_drive();
 
- /*prime_cata();
+ prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);*/
+  cata.move_velocity(0);
 
   //get 3 stack 
 
@@ -863,11 +1016,11 @@ void skills() {
  chassis.set_drive_pid(48, DRIVE_SPEED, true);
  chassis.wait_drive();
 
- /* prime_cata();
+  prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);*/
+  cata.move_velocity(0);
 
   //get line on low goal 1
 
@@ -884,11 +1037,11 @@ void skills() {
 
  intake.move_velocity(0);
 
- /*prime_cata();
+ prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);*/
+  cata.move_velocity(0);
 
   //get line on low goal 2
 
@@ -905,11 +1058,11 @@ void skills() {
 
  intake.move_velocity(0);
 
- /*prime_cata();
+ prime_cata();
   cata.move_velocity(100);
   pros::delay(500);
   prime_cata();
-  cata.move_velocity(0);*/
+  cata.move_velocity(0);
 
 
   // dash to expand
@@ -925,6 +1078,7 @@ void skills() {
 
  chassis.set_drive_pid(5, DRIVE_SPEED, true);
  chassis.wait_drive();
+ */
 
 
  Endgame.set_value(true);
