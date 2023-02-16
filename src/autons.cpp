@@ -678,42 +678,51 @@ void skills() {
   chassis.wait_drive();
 
   // spin rollers
-  intake.move_relative(400, -600);
+  intake.move_relative(750, -600);
   pros::delay(500);
 
   // move off rollers
-  chassis.set_drive_pid(10, DRIVE_SPEED, true);
+  chassis.set_drive_pid(3, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   // turn to lone disk
-  chassis.set_turn_pid(135, TURN_SPEED);
+  chassis.set_turn_pid(125, TURN_SPEED);
   chassis.wait_drive();
 
+  //intake on
+  intake.move_velocity(600);
+
   // Intake disc + get roller
-  chassis.set_drive_pid(-24, DRIVE_SPEED, true);
+  chassis.set_drive_pid(-36, 50, true);
+  chassis.wait_drive();
+
+  //drive away
+   chassis.set_drive_pid(4, 50, true);
   chassis.wait_drive();
 
   // Swing to goal
-  chassis.set_swing_pid(ez::RIGHT_SWING, -24, SWING_SPEED);
+  chassis.set_turn_pid( 0, TURN_SPEED);
   chassis.wait_drive();
 
   // Drive to goal
-  chassis.set_drive_pid(48, DRIVE_SPEED, true);
+  chassis.set_drive_pid(52, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   // Shoot
   fire();
+
+ 
 
   // Get 3 on Barrier
   chassis.set_swing_pid(ez::RIGHT_SWING, -90, SWING_SPEED);
   chassis.wait_drive();
 
   // Intake 3 on barrier
-  chassis.set_drive_pid(-28, 70, true);
+  chassis.set_drive_pid(-40, 30, true);
   chassis.wait_drive();
 
   // Go to shoot
-  chassis.set_drive_pid(-28, 70, true);
+  chassis.set_drive_pid(35, 70, true);
   chassis.wait_drive();
 
   // Turn to goal
@@ -728,20 +737,24 @@ void skills() {
   chassis.wait_drive();
 
   // Move back to intake that disk
-  chassis.set_drive_pid(-28, 70, true);
+  chassis.set_drive_pid(-35, 70, true);
   chassis.wait_drive();
 
   // Turn to the rest
-  chassis.set_turn_pid(-45, TURN_SPEED);
+  chassis.set_turn_pid(-135, TURN_SPEED);
   chassis.wait_drive();
 
   // Intake the rest
-  chassis.set_drive_pid(-30, 70, true);
+  chassis.set_drive_pid(-45, 70, true);
   chassis.wait_drive();
 
   // Turn to goal
   chassis.set_turn_pid(-45, TURN_SPEED);
   chassis.wait_drive();
+
+  chassis.set_drive_pid(10, 70, true);
+  chassis.wait_drive();
+
 
   // Shoot
   fire();
@@ -779,8 +792,13 @@ void skills() {
   pros::delay(1000);
 
   // Drive to goal
-  chassis.set_drive_pid(-24, 70, true);
+  chassis.set_drive_pid(24, 70, true);
   chassis.wait_drive();
+
+  // Turn to goal 
+  chassis.set_turn_pid(-60, TURN_SPEED);
+  chassis.wait_drive();
+
 
   
 
