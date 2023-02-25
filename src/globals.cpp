@@ -86,6 +86,7 @@ void fire() {
   state = false;
 }
 
+
 void lower() {
     
     if (!limit.get_value()) {
