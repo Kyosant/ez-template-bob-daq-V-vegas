@@ -31,10 +31,10 @@ const int SWING_SPEED = 100; //90
 void default_constants() {
   chassis.set_slew_min_power(80, 80);
   chassis.set_slew_distance(7, 7);
-  chassis.set_pid_constants(&chassis.headingPID, 11, 0, 20, 0);
+  chassis.set_pid_constants(&chassis.headingPID, 11, 0, 35, 0);//11, 0 ,20 ,0
   chassis.set_pid_constants(&chassis.forward_drivePID, 0.45, 0, 5, 0);
   chassis.set_pid_constants(&chassis.backward_drivePID, 0.45, 0, 5, 0);
-  chassis.set_pid_constants(&chassis.turnPID, 5, 0.003, 35, 15);
+  chassis.set_pid_constants(&chassis.turnPID, 5, 0.003, 38, 15);//5 .003 35, 15
   chassis.set_pid_constants(&chassis.swingPID, 7, 0, 45, 0);
 }
 
@@ -257,137 +257,107 @@ void interfered_example() {
 
 void wpL() {
 
-  // lower catapult at the start of auton
+  cataMid = true;
+  // lower cata
   lower();
+
+  //lower wings to lower intake
+  pros::delay(500);
+
+
+  // wing delay to come back up
+  pros:: delay(200);
+
   
-  // move back to roller
-  chassis.set_drive_pid(-2, DRIVE_SPEED, true);
-  chassis.wait_drive();
 
-  // spin roller
-  intake.move_relative(400, -600);
-  pros::delay(300);
-
-  // drive up to line to shoot
-  chassis.set_drive_pid(12, DRIVE_SPEED, true);
-  chassis.wait_drive();
-
-  // turn to goal
-  chassis.set_turn_pid(-12, TURN_SPEED);
-  chassis.wait_drive();
-
-  // shoot 
-  fire();
-
-  // start intake
+  // intake 
   intake.move_velocity(600);
 
-  // back away from line
-  chassis.set_drive_pid(-6, DRIVE_SPEED, true);
+  // move back to triball
+  chassis.set_drive_pid(13, DRIVE_SPEED, true);
   chassis.wait_drive();
 
-  // turn to 3 stack
-  chassis.set_turn_pid(-135, TURN_SPEED);
-  chassis.wait_drive();
-
-  // raise intake
-  Pistake.set_value(true);
-
-  // drive over 3 stack
-  chassis.set_drive_pid(-15  , 100, true);
-  chassis.wait_drive();
-
-  // lower intake
-  Pistake.set_value(false);
-
-  // wait a bit
-  pros::delay(600);
-
-  // keep going to the middle
-  chassis.set_drive_pid(-25  , 100, true);
-  chassis.wait_drive();
-
-  // turn to goal
-  chassis.set_turn_pid(-32, TURN_SPEED);
-  chassis.wait_drive();
-
-  // drive up to the line
-  chassis.set_drive_pid(11  , DRIVE_SPEED, true);
-  chassis.wait_drive();
-
-  // shoot
-  fire();
-
-  // back up
-  chassis.set_drive_pid(-5, DRIVE_SPEED, true);
-  chassis.wait_drive();
-
-  // turn to get line of 3
-  chassis.set_turn_pid(-135, TURN_SPEED);
-  chassis.wait_drive();
-
-  // start intake
-  intake.move_velocity(600);
-
-  // go back to roller
-  chassis.set_drive_pid(-90, 100, true);
-  chassis.wait_drive();
-
+  // wait a lil for the triball to intake
   pros::delay(100);
-  
-  // stop intake
-  intake.move_velocity(0);
 
-  // drive off of roller
-  chassis.set_drive_pid(65, DRIVE_SPEED, true);
+  // turn around
+  chassis.set_turn_pid(180, TURN_SPEED);
   chassis.wait_drive();
 
-  ///*
-  // experimental
-
-  // drive farther
-  //chassis.set_drive_pid(8, DRIVE_SPEED, true);
-  //chassis.wait_drive();
-
-  // swing to aim at goal
-  chassis.set_swing_pid(ez::LEFT_SWING, -43, TURN_SPEED);
+  // move back towards matchloader
+  chassis.set_drive_pid(20, 100);
   chassis.wait_drive();
 
-  // boost 
- // chassis.set_drive_pid(4, DRIVE_SPEED, true);
+   // swing to aim along matchloader
+  chassis.set_swing_pid(ez::LEFT_SWING, 225, 110);
+  chassis.wait_drive();
 
-  // shoot
-  fire();
+  // wing down to get preload
+  pros::delay(1000);
 
-  // swing to aim at goal
+  // move to get preload out
+  chassis.set_drive_pid(10, 100);
+  chassis.wait_drive();
 
+  // swing towards goal 
+  chassis.set_swing_pid(ez::LEFT_SWING, 270, 110);
+  chassis.wait_drive();
+
+  //intake out
+  intake.move_velocity(-600);
+
+  // drive into goal
+  chassis.set_drive_pid(10, 100);
+  chassis.wait_drive();
+
+  //wing up
+  pros::delay(500);
+
+  //back out
+  chassis.set_drive_pid(-5, 100);
+  chassis.wait_drive();
+
+  //turn towards center triball
+  chassis.set_turn_pid(315, TURN_SPEED);
+  chassis.wait_drive();
+
+  // intake
   intake.move_velocity(600);
 
-  chassis.set_drive_pid(-11, DRIVE_SPEED, true);
-  chassis.wait_drive();
-pros::delay(100);
-  chassis.set_swing_pid(ez::LEFT_SWING, -89, TURN_SPEED);
+  // go to triball
+  chassis.set_drive_pid(30, 100);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(-40, 80, true);
+  // swing into triball
+  chassis.set_swing_pid(LEFT_SWING, 360, TURN_SPEED);
   chassis.wait_drive();
 
-  chassis.set_swing_pid(ez::RIGHT_SWING, -58, TURN_SPEED);
+  // slightly back up into it
+  chassis.set_drive_pid(5, 100);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(20, 120, true);
-  pros::delay(350);
-  fire();
+
+  // turn to goal
+  chassis.set_turn_pid(180, 100);
+  chassis.wait_drive();
+
+  // wing out
+  pros::delay(1000);
+
+  // drive into goal
+  chassis.set_drive_pid(30, 100);
+  chassis.wait_drive();
+
+  // back out
+  chassis.set_drive_pid(-15, 100);
+  chassis.wait_drive();
+
+
+
+
+
   
 
-  
-
-
-
-  //*/
-  
- 
- 
 }
 
 void halfwpR() {
@@ -395,114 +365,84 @@ void halfwpR() {
   // lower cata
   lower();
 
-  // turn on intake
+  chassis.set_drive_pid(7, 90, true);
+  chassis.wait_drive();
+
+   chassis.set_turn_pid(25, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(1, 100, true);
+  pros::delay(10);
+
+   fire();
+
+   chassis.set_drive_pid(-1, 90, true);
+  chassis.wait_drive();
+
+   chassis.set_swing_pid(ez::LEFT_SWING, 125, TURN_SPEED);
+  chassis.wait_drive();
+
+  
+  chassis.set_drive_pid(25, 90, true);
+  chassis.wait_drive();
+
+   intake.move_relative(800, 600);
+  pros::delay(500);
+
+  chassis.set_drive_pid(-15, 90, true);
+  chassis.wait_drive();
+
+   chassis.set_turn_pid(-45, TURN_SPEED);
+  chassis.wait_drive();
+
+ // turn on intake
+  intake.move_velocity(600);
+  
+  chassis.set_drive_pid(57, 60, true);
+  chassis.wait_drive();
+  
+  // turn towards goal
+  chassis.set_turn_pid(47, TURN_SPEED);
+  chassis.wait_drive();
+
+// drive to the line
+  chassis.set_drive_pid(4, 100, true);
+ pros::delay(200);
+ 
+  // shoot
+  fire();
+
   intake.move_velocity(600);
 
-  // drive and pick up disk
-  chassis.set_drive_pid(-30, 50, true);
+   chassis.set_turn_pid(-90, TURN_SPEED);
   chassis.wait_drive();
 
-  // turn towards goal
-  chassis.set_turn_pid(-156, TURN_SPEED);
+  chassis.set_drive_pid(-4, 90, true);
   chassis.wait_drive();
 
-  // wait for disk to settle
-  pros::delay(500);
 
-  // drive to the line
-  chassis.set_drive_pid(5, 60, true);
- 
- 
-  // shoot
-  fire();
-  pros::delay(500);
+ intake.move_velocity(600);
+   
 
-  // move forwards a bit
-  chassis.set_drive_pid(5, 70, true);
+  chassis.set_swing_pid(ez::RIGHT_SWING, -180, TURN_SPEED);
   chassis.wait_drive();
 
-  // turn to lowgoal
-  chassis.set_turn_pid(-90, TURN_SPEED);
+  chassis.set_drive_pid(40, 50, true);
   chassis.wait_drive();
 
-  // pick up lone disk and far right lowgoal disk
-  chassis.set_drive_pid(-27, 80, true);
+  chassis.set_swing_pid(ez::RIGHT_SWING, -334, TURN_SPEED);
   chassis.wait_drive();
 
-  // drive forwards a bit to clear the turn
-  chassis.set_drive_pid(2, DRIVE_SPEED, true);
+  chassis.set_drive_pid(36, 110, true);
   chassis.wait_drive();
 
-  // turn to 3rd disk
-  chassis.set_turn_pid(-0, 70);
-  chassis.wait_drive();
-
-  // go to 3rd disk
-  chassis.set_drive_pid(-20, 70, true);
-  chassis.wait_drive();
-
-  // turn to goal
-  chassis.set_turn_pid(228, 60);
-  chassis.wait_drive();
-
-  // drive to line
-  chassis.set_drive_pid(5, 70, true);
-  chassis.wait_drive();
+  pros::delay(300);
 
   // shoot
   fire();
-  
-  // back up a lil bit
-  chassis.set_drive_pid(-7, DRIVE_SPEED, true);
-  chassis.wait_drive();
-
-  // turn to rollers
-  chassis.set_turn_pid(135, 60);
-  chassis.wait_drive();
-
-  // turn off intake
-  intake.move_velocity(0);
-
-  // move back to rollers
-  chassis.set_drive_pid(-72, 70, true);
-  chassis.wait_drive();
-
-  // spin rollers
-  intake.move_relative(400, -600);
-  pros::delay(500);
-
-  // drive away from rollers
-  chassis.set_drive_pid(10, DRIVE_SPEED, true);
-  chassis.wait_drive();
-
-  /* 
-  // experimental
-
-  // swing off rollers
-  chassis.set_swing_pid(ez::RIGHT_SWING, 45, TURN_SPEED);
-  chassis.wait_drive();
-
-  // open piston intake
-  Pistake.set_value(true);
-
-  // drive into stack
-  chassis.set_drive_pid(-20, DRIVE_SPEED, true);
-  chassis.wait_drive();
-
-  // decimate it
-  Pistake.set_value(false);
-  pros::delay(100);
-
-  // swing to goal
-  chassis.set_swing_pid(ez::RIGHT_SWING, -225, TURN_SPEED);
-  chassis.wait_drive();
-
-  // shoot
-  fire();
-  
-  */
 
 
+    
 
 
 }
@@ -516,98 +456,151 @@ void halfwpL() {
   chassis.set_drive_pid(-2, DRIVE_SPEED, true);
   chassis.wait_drive();
 
+  pros::delay(100);
+
   // spin rollers
-  intake.move_relative(400, -600);
+  intake.move_relative(-600, 600);
   pros::delay(500);
 
-  // move off rollers
-  chassis.set_drive_pid(12, DRIVE_SPEED, true);
-  chassis.wait_drive();
+  //raise intake
+  
 
-  // turn to goal
-  chassis.set_turn_pid(-12, TURN_SPEED);
+ chassis.set_drive_pid(4.5, 100);
+chassis.wait_drive();
+ chassis.set_turn_pid(-9.5, TURN_SPEED);
   chassis.wait_drive();
+ 
 
-  // shoot
+  chassis.set_drive_pid(.5, 110);
+chassis.wait_drive();
+
+
+  
+
   fire();
 
-  // back away from line
-  chassis.set_drive_pid(-0, DRIVE_SPEED, true);
+  chassis.set_turn_pid(0, TURN_SPEED);
   chassis.wait_drive();
 
+  chassis.set_drive_pid(9, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  
+
+
+
+  pros::delay(200);
+
+   // intake on
+  intake.move_velocity(600);
+
+   // turn to goal
+  chassis.set_swing_pid(ez::RIGHT_SWING, -25, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(3, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  // decimate stack
+  
+  pros::delay(1500);
+
+ 
+
+  pros::delay(1000);
+
+  // back away from line
+  chassis.set_drive_pid(-8, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  chassis.set_swing_pid(ez::LEFT_SWING, -10, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(6, 110);
+  pros::delay(40);
+  
+
+  fire();
+
+   chassis.set_drive_pid(-11, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+ 
+
   //raise intake
-  Pistake.set_value(true);
+ 
 
   //turn towards stack
-  chassis.set_turn_pid(160, TURN_SPEED);
+  chassis.set_turn_pid(45, TURN_SPEED);
   chassis.wait_drive();
 
   // move over stack
-  chassis.set_drive_pid(-6, 90, true);
+  chassis.set_drive_pid(18, 110, true);
   chassis.wait_drive();
 
   // intake on
   intake.move_velocity(600);
 
   // decimate stack
-  Pistake.set_value(false);
-  pros::delay(1000);
+  
+  pros::delay(1400);
 
   // move away from line
-  chassis.set_drive_pid(10, 90, true);
+  chassis.set_drive_pid(10, 110, true);
   chassis.wait_drive();
 
   // turn to goal
-  chassis.set_turn_pid(-11, TURN_SPEED);
+  chassis.set_turn_pid(-24, TURN_SPEED);
   chassis.wait_drive();
 
   // drive forwards and boost
-  chassis.set_drive_pid(14, DRIVE_SPEED, true);
-  pros::delay(250);
+  chassis.set_drive_pid(8, DRIVE_SPEED, true);
+  pros::delay(200);
   
   // shoot
   fire();
-  pros::delay(100);
+ 
 
-  // raise intake
-  Pistake.set_value(true);
+  pros::delay(999899);
 
-  // swing to 3 stack
-  chassis.set_swing_pid(ez::LEFT_SWING, -140, TURN_SPEED);
+  
+
+
+  chassis.set_drive_pid(-32, 110);
   chassis.wait_drive();
 
-  // go over stack
-  chassis.set_drive_pid(-8, 90);
+  chassis.set_turn_pid(95, TURN_SPEED);
   chassis.wait_drive();
 
-  Pistake.set_value(false);
-  pros::delay(1300);
-
-  intake =0;
-
-  chassis.set_drive_pid(-40, 90);
+   chassis.set_drive_pid(7, 110, true);
   chassis.wait_drive();
 
-
-  // turn to goal
-  chassis.set_turn_pid(-42, TURN_SPEED);
+  chassis.set_swing_pid(ez::RIGHT_SWING, 5, TURN_SPEED);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(7, 90);
+   chassis.set_drive_pid(43, 80, true);
   chassis.wait_drive();
+  
+  chassis.set_swing_pid(ez::RIGHT_SWING, -45, TURN_SPEED);
+  chassis.wait_drive();
+
+   
+    pros::delay(100);
+
 
   fire();
-  pros::delay(300);
+  
 
-  intake.move_velocity(600);
 
-  chassis.set_drive_pid(-12, 90);
+  /*intake.move_velocity(600);
+
+  chassis.set_drive_pid(-15, 90);
   chassis.wait_drive();
 
   chassis.set_swing_pid(ez::RIGHT_SWING, -1, TURN_SPEED);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(-39, 90);
+  chassis.set_drive_pid(-35, 80);
   chassis.wait_drive();
 
  
@@ -619,8 +612,8 @@ void halfwpL() {
   chassis.wait_drive();
   
   // shoot
-  fire();
-  pros::delay(100);
+  fire();*/
+ 
 
 
 
@@ -742,7 +735,7 @@ void skills() {
   intake.move_velocity(600);
 
   // Intake disc + get roller
-  chassis.set_drive_pid(-33, 60, true);
+  chassis.set_drive_pid(-33.5, 60, true);
   chassis.wait_until(-30);
   chassis.set_max_speed(50); 
   chassis.wait_drive();
@@ -760,7 +753,7 @@ void skills() {
   chassis.set_drive_pid(55, DRIVE_SPEED, true);
   chassis.wait_drive();
 
-  chassis.set_turn_pid( 5, TURN_SPEED);
+  chassis.set_turn_pid( 3, TURN_SPEED);
   chassis.wait_drive();
 
   // Shoot
@@ -779,7 +772,7 @@ void skills() {
   chassis.wait_drive();
 
   // Intake 3 on barrier
-  chassis.set_drive_pid(-34, 60, true);
+  chassis.set_drive_pid(-34, 50, true);
   chassis.wait_drive();
 
   pros::delay(400);
@@ -789,7 +782,7 @@ void skills() {
   chassis.wait_drive();
 
   // Turn to goal
-  chassis.set_turn_pid(8, TURN_SPEED);
+  chassis.set_turn_pid(3, TURN_SPEED);
   chassis.wait_drive();
 
   // Shoot
@@ -800,7 +793,7 @@ void skills() {
   chassis.wait_drive();
 
   // Turn to first disk in line of 3
-  chassis.set_turn_pid(-46, TURN_SPEED);
+  chassis.set_turn_pid(-45, TURN_SPEED);
   chassis.wait_drive();
 
   // Move back to intake that disk
@@ -812,7 +805,7 @@ void skills() {
   chassis.wait_drive();
 
   // Intake the rest
-  chassis.set_drive_pid(-30, 50, true);
+  chassis.set_drive_pid(-29, 50, true);
   chassis.wait_drive();
 
   // Turn to goal
@@ -830,7 +823,7 @@ void skills() {
 
   intake.move_velocity(-600);
 
-  chassis.set_drive_pid(-21, 70, true);
+  chassis.set_drive_pid(-22, 70, true);
   chassis.wait_drive();
 
   // Turn to last 3 on barrier
@@ -858,7 +851,7 @@ void skills() {
   chassis.wait_drive();
 
   // Pistake Up
-  Pistake.set_value(true);
+  
 
   pros::delay(200);
 
@@ -867,7 +860,7 @@ void skills() {
   chassis.wait_drive();
 
   // Eat stack
-  Pistake.set_value(false);
+ 
 
   // Wait before swimming
   pros::delay(1000);
@@ -892,7 +885,7 @@ void skills() {
   chassis.wait_drive();
 
   // pistake up
-  Pistake.set_value(true);
+  
 
   // drive back to 3 stack by rollers
   chassis.set_drive_pid(-40, 70, true);
@@ -901,7 +894,7 @@ void skills() {
   chassis.wait_drive();
 
   // eat
-  Pistake.set_value(false);
+  
 
   // wait before swimming
   pros::delay(800);
@@ -946,14 +939,14 @@ void skills() {
   chassis.wait_drive();
 
 
-  chassis.set_drive_pid(70, DRIVE_SPEED, true);
+  chassis.set_drive_pid(69, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   intake.move_velocity(600);
 
 
 
-  chassis.set_turn_pid(-178, TURN_SPEED);
+  chassis.set_turn_pid(-179, TURN_SPEED);
   chassis.wait_drive();
 
   fire();
@@ -987,7 +980,7 @@ void skills() {
   chassis.wait_drive();
 
   // Move back to intake that disk
-  chassis.set_drive_pid(-34, 30, true);
+  chassis.set_drive_pid(-34, 70, true);
   chassis.wait_drive();
 
   // Turn to the rest
@@ -1026,7 +1019,7 @@ void skills() {
   chassis.wait_drive();
 
   // Turn to goal 
-  chassis.set_turn_pid(-273, TURN_SPEED);
+  chassis.set_turn_pid(-275, TURN_SPEED);
   chassis.wait_drive();
 
   chassis.set_drive_pid(-2, 90, true);
@@ -1041,14 +1034,14 @@ void skills() {
   chassis.wait_drive();
 
   // Pistake Up
-  Pistake.set_value(true);
+ 
 
   // Drive over stack
   chassis.set_drive_pid(-25, 80, true);
   chassis.wait_drive();
 
   // Eat stack
-  Pistake.set_value(false);
+  
 
   // Wait before swimming
   pros::delay(800);
@@ -1073,14 +1066,14 @@ void skills() {
   chassis.wait_drive();
 
   // Pistake Up
-  Pistake.set_value(true);
+  
 
   // Drive over stack
   chassis.set_drive_pid(-40, 80, true);
   chassis.wait_drive();
 
   // Eat stack
-  Pistake.set_value(false);
+  
 
   // Wait before swimming
   pros::delay(1000);
@@ -1107,7 +1100,7 @@ void skills() {
   chassis.wait_drive();
 
 
- Endgame.set_value(true);
+ 
 
 
 

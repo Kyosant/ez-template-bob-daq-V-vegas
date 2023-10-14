@@ -2,8 +2,8 @@
 #include "EZ-Template/util.hpp"
 #include "autons.hpp"
 #include "globals.h"
+#include "pros/misc.h"
 #include "pros/rtos.hpp"
-
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -12,11 +12,15 @@
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
+
+ 
   
   pros::Task cata_task(cata_task_fn);
   
   state = true;
-  Endgame.set_value(false);
+
+  
+  
   cata.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   
   // Print our branding over your terminal :D
@@ -26,8 +30,8 @@ void initialize() {
 
   // Configure your chassis controls
   chassis.toggle_modify_curve_with_controller(true); // Enables modifying the controller curve with buttons on the joysticks
-  chassis.set_active_brake(0.1); // Sets the active brake kP. We recommend 0.1.
-  chassis.set_curve_default(0, .7); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
+  chassis.set_active_brake(0); // Sets the active brake kP. We recommend 0.1.
+  chassis.set_curve_default(0, 7); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
   default_constants(); // Set the drive to your own constants from autons.cpp!
   exit_condition_defaults(); // Set the exit conditions to your own constants from autons.cpp!
 
@@ -133,17 +137,17 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
-
+    
     //intake
-    if (con1.get_digital(DIGITAL_L1)&&limit.get_value()){
+    if (con1.get_digital(DIGITAL_L1)&&(rotation.get_position() >= 6000)){
       //intake
       intake.move_voltage(12000);
 
     }else if (con1.get_digital(DIGITAL_L2)){
-      //rollers
+      //score
       intake.move_voltage(-12000);
 
-    }else if (con1.get_digital(DIGITAL_R2)){
+    }else if (con1.get_digital(DIGITAL_LEFT)){
       //intake override
       intake.move_voltage(12000);
 
@@ -151,30 +155,46 @@ void opcontrol() {
       intake.move_velocity(0);
     }
 
-    // band release
-    if (con1.get_digital(DIGITAL_LEFT)) {
-      Bands.set_value(true);
-    }
+   
 
     // cata
     if (con1.get_digital(DIGITAL_R1)) {
       fire();
     }
 
-    // endgame
-    if (con1.get_digital(DIGITAL_A)&&con1.get_digital(DIGITAL_X)&&con1.get_digital(DIGITAL_B)&&con1.get_digital(DIGITAL_Y)) {
-      Endgame.set_value(true);
+    // wings
+    if (con1.get_digital(DIGITAL_R2)) {
+      wings.set_value(true);
+
     } else {
+      wings.set_value(false);
     }
 
-    // piston intake
-    if (con1.get_digital(DIGITAL_UP)) {
-      Pistake.set_value(true);
-
-    }else if (con1.get_digital(DIGITAL_DOWN)) {
-      Pistake.set_value(false);
+    // hang
+    if (con1.get_digital(DIGITAL_A)&&con1.get_digital(DIGITAL_X)&&con1.get_digital(DIGITAL_B)&&con1.get_digital(DIGITAL_Y)) {
+      hang.set_value(true);
+    } else {
       
     }
+
+    // blocker
+    if (con1.get_digital(DIGITAL_UP)) {
+      blocker.set_value(true);
+
+    }else if (con1.get_digital(DIGITAL_DOWN)) {
+      blocker.set_value(false);
+      
+    }
+
+    //cata halfway mode
+    if (con1.get_digital(DIGITAL_X)){
+      cataMid = true;
+    } else if (con1.get_digital(DIGITAL_B)){
+      cataMid = false;
+
+    }
+
+    
 
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }

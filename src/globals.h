@@ -8,16 +8,24 @@
 extern pros::Motor cata;
 extern bool cata_override;
 extern bool state;
+extern bool cataMid;
+extern bool up;
+extern bool down;
+extern bool yes;
+extern bool no;
 extern pros::Motor intake;
 extern Drive chassis;
-extern pros::ADIDigitalOut Endgame;
-extern pros:: ADIDigitalIn limit;
-extern pros::ADIDigitalOut Bands;
-extern pros::ADIDigitalOut Pistake;
+extern pros::Rotation rotation;
+extern pros::ADIDigitalOut hang;
+extern pros::ADIDigitalOut wings;
+extern pros::ADIDigitalOut blocker;
 extern pros::Controller con1;
+
 
 
 extern void cata_task_fn();
 extern void fire();
 extern void lower();
+extern void wingstate(bool);
+
 extern pros::Controller con1;
