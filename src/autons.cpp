@@ -287,25 +287,25 @@ void wpL() {
   pros::delay(100);
 
   // turn around
-  chassis.set_turn_pid(180, TURN_SPEED);
+  chassis.set_turn_pid(-180, TURN_SPEED);
   chassis.wait_drive();
 
   //inatek off
   intake.move_velocity(0);
 
   // move back towards matchloader
-  chassis.set_drive_pid(45, 100);
+  chassis.set_drive_pid(-45, 100);
   chassis.wait_drive();
 
    // swing to aim along matchloader
-  chassis.set_swing_pid(ez::LEFT_SWING, 225, 110);
+  chassis.set_swing_pid(ez::RIGHT_SWING, -225, 110);
   chassis.wait_drive();
 
   //intake out
   intake.move_velocity(-600);
 
   // wing down to get preload
-  pros::delay(1000);
+  pros::delay(500);
 
 
   // move to get preload out
@@ -316,7 +316,7 @@ void wpL() {
   pros::delay(500);
 
   // swing towards goal 
-  chassis.set_swing_pid(ez::LEFT_SWING, 270, 110);
+  chassis.set_swing_pid(ez::RIGHT_SWING, -270, 110);
   chassis.wait_drive();
 
   //intake out
@@ -339,7 +339,7 @@ void wpL() {
   chassis.wait_drive();
 
   //turn towards center triball
-  chassis.set_turn_pid(323, TURN_SPEED);
+  chassis.set_turn_pid(-323, TURN_SPEED);
   chassis.wait_drive();
 
   // intake
@@ -350,7 +350,7 @@ void wpL() {
   chassis.wait_drive();
 
   // swing into triball
-  chassis.set_swing_pid(ez::RIGHT_SWING, 180, TURN_SPEED);
+  chassis.set_swing_pid(ez::LEFT_SWING, -180, TURN_SPEED);
   chassis.wait_drive();
 
   // slightly back up into it
@@ -359,14 +359,14 @@ void wpL() {
 
 
   // turn to goal
-  chassis.set_turn_pid(180, 100);
+  chassis.set_turn_pid(-180, 100);
   chassis.wait_drive();
 
   //intake out
    intake.move_velocity(-600);
 
   // wing out
-  pros::delay(1000);
+  pros::delay(500);
 
   // drive into goal
   chassis.set_drive_pid(30, 100);
