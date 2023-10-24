@@ -83,16 +83,16 @@ void cata_task_fn() {
     
    
     int catapos = rotation.get_angle() / 100;
-    if (!abs(catapos >= 60) or !abs(catapos >= 82)  && (state == false)) {
+    if (!abs(catapos >= 31) or !abs(catapos >= 31)  && (state == false)) {
       // move catapult down until its reached loading position
       cata = 127;
       
 
-    } else if (!cata_override && abs(catapos >= 82) && !cataMid) {
+    } else if (!cata_override && abs(catapos >= 31) && !cataMid) {
       cata = 0;
       state = true;
 
-    } else if (!cata_override && (catapos >= 60) && cataMid) {
+    } else if (!cata_override && (catapos >= 31) && cataMid) {
       cata = 0;
       state = true;
       
@@ -117,7 +117,7 @@ void fire() {
 
 void lower() {
     
-    if (!(rotation.get_angle() >= 8200)) {
+    if (!(rotation.get_angle() >= 3100)) {
         cata = 127;
     } else {
         
@@ -125,28 +125,33 @@ void lower() {
 
 }
 
-void wingState(bool) {
-    if (true) {
-      wings.set_value(true);
-    } else {
-      wings.set_value(false);
-    }
-}
-
 
 
 class robotWings {
   public:
-    int lower();
-    int raise();
+    void raise(){
+      wings.set_value(true);
+    }
+    void lower(){
+      wings.set_value(false);
+    }
+}wingy;
+
+
+
+class robotBlocker{
+  public: 
+  void raise(){
+    blocker.set_value(true);
+  }
+  void lower(){
+    blocker.set_value(false);
+  }
 };
 
-int robotWings::lower() {
-  wings.set_value(false);
 
-}
 
-robotWings wingy;
+robotBlocker blocky;
 
 
 

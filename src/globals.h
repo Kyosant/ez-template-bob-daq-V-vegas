@@ -5,6 +5,8 @@
 #include "pros/motors.hpp"
 
 
+
+extern class robotWings wingy;
 extern pros::Motor cata;
 extern bool cata_override;
 extern bool state;
@@ -20,6 +22,8 @@ extern pros::ADIDigitalOut hang;
 extern pros::ADIDigitalOut wings;
 extern pros::ADIDigitalOut blocker;
 extern pros::Controller con1;
+
+
 
 
 
