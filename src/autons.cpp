@@ -262,16 +262,17 @@ void interfered_example() {
 
 void wpL() {
 
-  cataMid = true;
+
   // lower cata
   lower();
 
   //lower wings to lower intake
-  
-  pros::delay(500);
+  wings(down);
+  pros::delay(400);
 
 
   // wing delay to come back up
+  wings(up);
   pros:: delay(200);
 
   
@@ -290,14 +291,14 @@ void wpL() {
   chassis.set_turn_pid(-180, TURN_SPEED);
   chassis.wait_drive();
 
-  //inatek off
+  //inatke off
   intake.move_velocity(0);
 
   // move back towards matchloader
   chassis.set_drive_pid(-45, 100);
   chassis.wait_drive();
 
-   // swing to aim along matchloader
+  // swing to aim along matchloader
   chassis.set_swing_pid(ez::RIGHT_SWING, -225, 110);
   chassis.wait_drive();
 
@@ -305,6 +306,7 @@ void wpL() {
   intake.move_velocity(-600);
 
   // wing down to get preload
+  wings(down);
   pros::delay(500);
 
 
@@ -313,6 +315,7 @@ void wpL() {
   chassis.wait_drive();
 
   //wing up
+  wings(up);
   pros::delay(500);
 
   // swing towards goal 
@@ -366,6 +369,7 @@ void wpL() {
    intake.move_velocity(-600);
 
   // wing out
+  wings(down);
   pros::delay(500);
 
   // drive into goal
@@ -753,6 +757,7 @@ void skills() {
   chassis.wait_drive();
 
   // lower wings
+  wings(down);
 
 
   // matchload and fire 50 times
@@ -761,6 +766,7 @@ void skills() {
   }
 
   //raise wings
+  wings(up);
 
 
   // turn towards goal
@@ -804,12 +810,14 @@ void skills() {
   chassis.wait_drive();
 
   // wing down
+  wings(down);
 
   //shove 
   chassis.set_drive_pid(34, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   //wing up
+  wings(up);
 
   //turn 
   chassis.set_turn_pid(135, TURN_SPEED);
@@ -820,7 +828,7 @@ void skills() {
   chassis.wait_drive();
 
   //wing down
-
+  wings(down);
 
   //turn 
   chassis.set_turn_pid(165, TURN_SPEED);
@@ -831,6 +839,7 @@ void skills() {
   chassis.wait_drive();
 
   //wing up
+  wings(up);
 
 
   //turn 
@@ -843,6 +852,7 @@ void skills() {
   chassis.wait_drive();
 
   //wing down
+  wings(down);
 
 
   //turn
@@ -854,6 +864,7 @@ void skills() {
   chassis.wait_drive();
 
   // wing up
+  wings(up);
 
 
   //turn
@@ -861,7 +872,7 @@ void skills() {
   chassis.wait_drive();
 
   //back up
-  chassis.set_drive_pid(-35, DRIVE_SPEED, true);
+  chassis.set_drive_pid(35, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   //turn
@@ -873,7 +884,7 @@ void skills() {
   chassis.wait_drive();
 
   //back up
-  chassis.set_drive_pid(-35, DRIVE_SPEED, true);
+  chassis.set_drive_pid(35, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   //turn
@@ -882,6 +893,10 @@ void skills() {
 
   //shove
   chassis.set_drive_pid(-34, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  //back up
+  chassis.set_drive_pid(10, DRIVE_SPEED, true);
   chassis.wait_drive();
 
 }

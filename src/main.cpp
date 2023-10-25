@@ -164,35 +164,29 @@ void opcontrol() {
 
     // wings
     if (con1.get_digital(DIGITAL_R2)) {
-      wings.set_value(true);
+      wings(down);
 
     } else {
-      wings.set_value(false);
+      wings(up);
     }
 
     // hang
     if (con1.get_digital(DIGITAL_A)&&con1.get_digital(DIGITAL_X)&&con1.get_digital(DIGITAL_B)&&con1.get_digital(DIGITAL_Y)) {
-      hang.set_value(true);
+      hangpiss.set_value(true);
     } else {
       
     }
 
     // blocker
     if (con1.get_digital(DIGITAL_UP)) {
-      blocker.set_value(true);
+      blocker(up);
 
     }else if (con1.get_digital(DIGITAL_DOWN)) {
-      blocker.set_value(false);
+      blocker(down);
       
     }
 
-    //cata halfway mode
-    if (con1.get_digital(DIGITAL_X)){
-      cataMid = true;
-    } else if (con1.get_digital(DIGITAL_B)){
-      cataMid = false;
-
-    }
+    
 
     
 

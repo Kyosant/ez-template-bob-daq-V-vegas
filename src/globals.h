@@ -10,7 +10,6 @@ extern class robotWings wingy;
 extern pros::Motor cata;
 extern bool cata_override;
 extern bool state;
-extern bool cataMid;
 extern bool up;
 extern bool down;
 extern bool yes;
@@ -18,9 +17,9 @@ extern bool no;
 extern pros::Motor intake;
 extern Drive chassis;
 extern pros::Rotation rotation;
-extern pros::ADIDigitalOut hang;
-extern pros::ADIDigitalOut wings;
-extern pros::ADIDigitalOut blocker;
+extern pros::ADIDigitalOut hangpiss;
+extern pros::ADIDigitalOut wingspiss;
+extern pros::ADIDigitalOut blockerpiss;
 extern pros::Controller con1;
 
 
@@ -30,6 +29,7 @@ extern pros::Controller con1;
 extern void cata_task_fn();
 extern void fire();
 extern void lower();
-extern void wingstate(bool);
+extern void wings(bool state);
+extern void blocker(bool state);
 
 extern pros::Controller con1;

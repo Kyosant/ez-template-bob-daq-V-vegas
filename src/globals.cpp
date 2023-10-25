@@ -56,9 +56,9 @@ pros::Rotation rotation(8);
 pros::ADIDigitalIn lim('D');
 
 
-pros::ADIDigitalOut wings('A');
-pros::ADIDigitalOut hang('B');
-pros::ADIDigitalOut blocker('C');
+pros::ADIDigitalOut wingspiss('A');
+pros::ADIDigitalOut hangpiss('B');
+pros::ADIDigitalOut blockerpiss('C');
 
 
 pros::Controller con1 (pros::E_CONTROLLER_MASTER);
@@ -68,7 +68,7 @@ pros::Controller con1 (pros::E_CONTROLLER_MASTER);
 void cataTask();
 bool cata_override = false;
 bool state = true;
-bool cataMid = true;
+
 
 bool up = true;
 bool down = false;
@@ -83,20 +83,17 @@ void cata_task_fn() {
     
    
     int catapos = rotation.get_angle() / 100;
-    if (!abs(catapos >= 31) or !abs(catapos >= 31)  && (state == false)) {
+
+    if (!abs(catapos >= 31) && (state == false)) {
       // move catapult down until its reached loading position
       cata = 127;
       
 
-    } else if (!cata_override && abs(catapos >= 31) && !cataMid) {
+    } else if (!cata_override && abs(catapos >= 31) ) {
       cata = 0;
       state = true;
-
-    } else if (!cata_override && (catapos >= 31) && cataMid) {
-      cata = 0;
-      state = true;
-      
     }
+    
 
     
 
@@ -105,6 +102,7 @@ void cata_task_fn() {
 }
 
 void fire() {
+
   cata_override = true;
   cata = 127;
   
@@ -126,32 +124,21 @@ void lower() {
 }
 
 
+void wings(bool state) {
 
-class robotWings {
-  public:
-    void raise(){
-      wings.set_value(true);
-    }
-    void lower(){
-      wings.set_value(false);
-    }
-}wingy;
+  wingspiss.set_value(state);
+    
+}
 
+void blocker(bool state) {
 
-
-class robotBlocker{
-  public: 
-  void raise(){
-    blocker.set_value(true);
-  }
-  void lower(){
-    blocker.set_value(false);
-  }
-};
+  blockerpiss.set_value(state);
+    
+}
 
 
 
-robotBlocker blocky;
+
 
 
 
