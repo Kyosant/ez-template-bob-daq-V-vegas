@@ -268,7 +268,7 @@ void wpL() {
 
   //lower wings to lower intake
   wings(down);
-  pros::delay(400);
+  pros::delay(100);
 
 
   // wing delay to come back up
@@ -281,7 +281,7 @@ void wpL() {
   intake.move_velocity(600);
 
   // move back to triball
-  chassis.set_drive_pid(10, DRIVE_SPEED, true);
+  chassis.set_drive_pid(5, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   // wait a lil for the triball to intake
@@ -295,7 +295,7 @@ void wpL() {
   intake.move_velocity(0);
 
   // move back towards matchloader
-  chassis.set_drive_pid(-45, 100);
+  chassis.set_drive_pid(40, 100);
   chassis.wait_drive();
 
   // swing to aim along matchloader
@@ -307,7 +307,7 @@ void wpL() {
 
   // wing down to get preload
   wings(down);
-  pros::delay(500);
+  pros::delay(100);
 
 
   // move to get preload out
@@ -316,7 +316,7 @@ void wpL() {
 
   //wing up
   wings(up);
-  pros::delay(500);
+  pros::delay(100);
 
   // swing towards goal 
   chassis.set_swing_pid(ez::RIGHT_SWING, -270, 110);
@@ -326,19 +326,11 @@ void wpL() {
   intake.move_velocity(-600);
 
   // drive into goal
-  chassis.set_drive_pid(17, 100);
+  chassis.set_drive_pid(14, 100);
   chassis.wait_drive();
 
   //back out
-  chassis.set_drive_pid(-10, 100);
-  chassis.wait_drive();
-
-  // drive into goal
-  chassis.set_drive_pid(10, 100);
-  chassis.wait_drive();
-
-  //back out
-  chassis.set_drive_pid(-20, 100);
+  chassis.set_drive_pid(-7, 100);
   chassis.wait_drive();
 
   //turn towards center triball
@@ -366,19 +358,60 @@ void wpL() {
   chassis.wait_drive();
 
   //intake out
-   intake.move_velocity(-600);
+  intake.move_velocity(-600);
 
   // wing out
   wings(down);
-  pros::delay(500);
+  pros::delay(200);
 
   // drive into goal
-  chassis.set_drive_pid(30, 100);
+  chassis.set_drive_pid(30, 90);
   chassis.wait_drive();
 
   // back out
   chassis.set_drive_pid(-15, 100);
   chassis.wait_drive();
+
+  //wing up
+  wings(up);
+  pros::delay(200);
+
+  //turn to last triball
+  chassis.set_turn_pid(45, 100);
+  chassis.wait_drive();
+
+  //intake in
+  intake.move_velocity(600);
+
+  // go to triball
+  chassis.set_drive_pid(24, 100);
+  chassis.wait_drive();
+
+  // go to goal
+  chassis.set_drive_pid(-24, 100);
+  chassis.wait_drive();
+
+  // turn to goal
+  chassis.set_turn_pid(-180, 100);
+  chassis.wait_drive();
+
+  //wing up
+  wings(down);
+  pros::delay(200);
+
+  // drive into goal
+  chassis.set_drive_pid(30, 90);
+  chassis.wait_drive();
+
+  // back out
+  chassis.set_drive_pid(-15, 100);
+  chassis.wait_drive();
+
+  //wing up
+  wings(up);
+  pros::delay(200);
+
+  
 
 
 

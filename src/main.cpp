@@ -139,7 +139,7 @@ void opcontrol() {
     // . . .
     
     //intake
-    if (con1.get_digital(DIGITAL_L1)&&(rotation.get_position() >= 6000)){
+    if (con1.get_digital(DIGITAL_L1)){
       //intake
       intake.move_voltage(12000);
 
